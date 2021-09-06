@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { LoadingSpinner } from './components/styles-lib';
+import { useAuth } from './contexts/auth-context';
+
+const AuthApp = React.lazy(() => import('./auth-app'));
+const UnauthorizedApp = React.lazy(() => import('./unauthorized-app'));
 
 function App() {
+  const { user } = useAuth();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Suspense fallback={<LoadingSpinner />}>
+      {user.token ? <AuthApp /> : <UnauthorizedApp />}
+    </React.Suspense>
   );
 }
 
