@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './app';
+import App from './App';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { AuthProvider } from './contexts/auth-context';
